@@ -9,6 +9,19 @@
   width: 250px;
   height: 90vh;
   padding-top: 2rem;
+  transition: transform 0.2s ease-in;
+
+  position: sticky;
+  top: 10vh;
+  left: 0;
+
+  a {
+    color: $text-color;
+    &:hover {
+      color: $text-color;
+      text-decoration: none;
+    }
+  }
 
   li {
     display: flex;
@@ -28,10 +41,14 @@
     &:hover {
       background-color: $border-color;
     }
+  }
 
-    hr {
-      background-color: $border-color;
-    }
+  hr {
+    background-color: $border-color;
+  }
+
+  &.open {
+    transform: translateX(0);
   }
 }
 
