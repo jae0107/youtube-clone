@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
-import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { Redirect, Route, Switch, useHistory } from 'react-router-dom'
 
 import Header from './components/header/Header'
 import Siderbar from './components/siderbar/Siderbar'
@@ -27,8 +28,16 @@ const Layout = ({ children }) => {
 }
 
 const App = () => {
+    const { accessToken, loading } = useSelector(state => state.auth);
+    const history = useHistory();
+    useEffect(() => {
+        if(!loading && !accessToken){
+            history.push('/auth');
+        }
+    }, [accessToken, loading, history]);
+
     return (
-        <Router>
+        
             <Switch>
                 <Route path='/' exact>
                     <Layout>
@@ -49,7 +58,7 @@ const App = () => {
                     <Redirect to='/'></Redirect>
                 </Route>
             </Switch>
-        </Router>
+        
     )
 }
 
