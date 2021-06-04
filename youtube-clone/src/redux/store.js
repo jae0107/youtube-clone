@@ -7,6 +7,6 @@ const rootReducer = combineReducers({
     auth: authReducer
 });
 
-const store = createStore(rootReducer, {}, composeWithDevTools(applyMiddleware(thunk)))
+const store = createStore(rootReducer, {}, composeWithDevTools(applyMiddleware(thunk)));
 
 export default store
