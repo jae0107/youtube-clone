@@ -1,7 +1,7 @@
 import { HOME_VIDEOS_FAIL, HOME_VIDEOS_REQUEST, HOME_VIDEOS_SUCCESS } from '../actionType';
 import request from '../../api'
 
-export const getPoplarVideos = () => async dispatch => {
+export const getPoplarVideos = () => async (dispatch, getState) => {
     try {
         dispatch({
             type: HOME_VIDEOS_REQUEST
@@ -13,7 +13,7 @@ export const getPoplarVideos = () => async dispatch => {
                 chart: "mostPopular",
                 regionCode: "AU",
                 maxResults: 20,
-                pageToken: ""
+                ppageToken: getState().homeVideos.nextPageToken
             }
         });
 
