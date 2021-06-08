@@ -5,6 +5,7 @@ import { Redirect, Route, Switch, useHistory } from 'react-router-dom'
 
 import Header from './components/header/Header'
 import Siderbar from './components/siderbar/Siderbar'
+import WatchScreen from './screens/ watchScreen/WatchScreen'
 import HomeScreen from './screens/homeScreen/HomeScreen'
 import LoginScreen from './screens/loginScreen/LoginScreen'
 import './_app.scss'
@@ -51,6 +52,12 @@ const App = () => {
                 <Route path='/search'>
                     <Layout>
                         <h1>Search Results</h1>
+                    </Layout>
+                </Route>
+
+                <Route path='/watch/:id'>
+                    <Layout>
+                        <WatchScreen />
                     </Layout>
                 </Route>
 
