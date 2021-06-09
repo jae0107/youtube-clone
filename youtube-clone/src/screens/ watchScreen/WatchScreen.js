@@ -31,7 +31,7 @@ const WatchScreen = () => {
                    !loading ? <VideoMetaData video={video} videoId={id}/> : <h6>Loading...</h6>
                }
                
-               <Comments />
+               <Comments videoId={id} totalComments={video?.statistics?.commentCount}/>
            </Col>
            <Col lg={4}>
                {
