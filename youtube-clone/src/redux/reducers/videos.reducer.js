@@ -1,4 +1,4 @@
-import { HOME_VIDEOS_FAIL, HOME_VIDEOS_REQUEST, HOME_VIDEOS_SUCCESS, RELATED_VIDEO_FAIL, RELATED_VIDEO_REQUEST, RELATED_VIDEO_SUCCESS, SELECTED_VIDEO_FAIL, SELECTED_VIDEO_REQUEST, SELECTED_VIDEO_SUCCESS } from '../actionType';
+import { HOME_VIDEOS_FAIL, HOME_VIDEOS_REQUEST, HOME_VIDEOS_SUCCESS, RELATED_VIDEO_FAIL, RELATED_VIDEO_REQUEST, RELATED_VIDEO_SUCCESS, SEARCHED_VIDEO_FAIL, SEARCHED_VIDEO_REQUEST, SEARCHED_VIDEO_SUCCESS, SELECTED_VIDEO_FAIL, SELECTED_VIDEO_REQUEST, SELECTED_VIDEO_SUCCESS } from '../actionType';
 
 export const homeVideosReducer = (
     state = {
@@ -51,20 +51,20 @@ export const selectedVideoReducer = (
         case SELECTED_VIDEO_REQUEST:
             return {
                 ...state,
-                loading: true,
+                loading: true
             }
         case SELECTED_VIDEO_SUCCESS:
             return {
                 ...state,
                 video: payload,
-                loading: false,
+                loading: false
             }
         case SELECTED_VIDEO_FAIL:
             return {
                 ...state,
                 video: null,
                 loading: false,
-                error: payload,
+                error: payload
             }
         default:
             return state
@@ -85,21 +85,54 @@ export const relatedVideoReducer = (
         case RELATED_VIDEO_REQUEST:
             return {
                 ...state,
-                loading: true,
+                loading: true
             }
         case RELATED_VIDEO_SUCCESS:
             return {
                 ...state,
                 videos: payload,
-                loading: false,
+                loading: false
             }
         case RELATED_VIDEO_FAIL:
             return {
                 ...state,
                 loading: false,
-                error: payload,
+                error: payload
             }
         default:
             return state
     }
 }
+
+export const searchedVideosReducer = (
+    state = {
+       loading: true,
+       videos: [],
+    },
+    action
+ ) => {
+    const { payload, type } = action
+ 
+    switch (type) {
+       case SEARCHED_VIDEO_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+       case SEARCHED_VIDEO_SUCCESS:
+            return {
+                ...state,
+                videos: payload,
+                loading: false
+            }
+       case SEARCHED_VIDEO_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: payload
+            }
+ 
+       default:
+          return state
+    }
+ }

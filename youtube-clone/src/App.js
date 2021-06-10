@@ -8,6 +8,7 @@ import Siderbar from './components/siderbar/Siderbar'
 import WatchScreen from './screens/ watchScreen/WatchScreen'
 import HomeScreen from './screens/homeScreen/HomeScreen'
 import LoginScreen from './screens/loginScreen/LoginScreen'
+import SearchScreen from './screens/SearchScreen'
 import './_app.scss'
 
 const Layout = ({ children }) => {
@@ -49,9 +50,9 @@ const App = () => {
                     <LoginScreen></LoginScreen>
                 </Route>
 
-                <Route path='/search'>
+                <Route path='/search/:query'>
                     <Layout>
-                        <h1>Search Results</h1>
+                        <SearchScreen />
                     </Layout>
                 </Route>
 
