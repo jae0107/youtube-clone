@@ -9,6 +9,7 @@ import WatchScreen from './screens/ watchScreen/WatchScreen'
 import HomeScreen from './screens/homeScreen/HomeScreen'
 import LoginScreen from './screens/loginScreen/LoginScreen'
 import SearchScreen from './screens/SearchScreen'
+import SubscriptionsScreen from './screens/subscriptionsScreen/SubscriptionsScreen'
 import './_app.scss'
 
 const Layout = ({ children }) => {
@@ -59,6 +60,18 @@ const App = () => {
                 <Route path='/watch/:id'>
                     <Layout>
                         <WatchScreen />
+                    </Layout>
+                </Route>
+
+                <Route path='/feed/subscriptions'>
+                    <Layout>
+                        <SubscriptionsScreen />
+                    </Layout>
+                </Route>
+
+                <Route path='/channel/:channelId'>
+                    <Layout>
+                        channel screen
                     </Layout>
                 </Route>
 
