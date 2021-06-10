@@ -9,7 +9,7 @@ export const getPoplarVideos = () => async (dispatch, getState) => {
 
         const {data} = await request("/videos", {
             params: {
-                part: "snippet, contentDetails, statistics",
+                part: "snippet,contentDetails,statistics",
                 chart: "mostPopular",
                 regionCode: "AU",
                 maxResults: 20,
@@ -77,7 +77,7 @@ export const getVideoById = (id) => async dispatch => {
 
         const { data } = await request('/videos', {
             params: {
-                part: 'snippet, statistics',
+                part: 'snippet,statistics',
                 id: id
             }
         });
@@ -134,9 +134,9 @@ export const getVideosBySearch = (keyword) => async dispatch => {
         const {data} = await request("/search", {
             params: {
                 part: "snippet",
-                maxResults: 20,
+                maxResults: 100,
                 q: keyword,
-                type: 'video, channel'
+                type: 'video,channel'
             }
         });
 
