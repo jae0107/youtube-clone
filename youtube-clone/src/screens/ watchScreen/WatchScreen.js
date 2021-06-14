@@ -8,6 +8,7 @@ import VideoMetaData from '../../components/videoMetaData/VideoMetaData'
 import './WatchScreen.scss'
 import { getRelatedVideos, getVideoById } from '../../redux/actions/videos.action'
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import { Helmet } from 'react-helmet'
 
 const WatchScreen = () => {
     const { id } = useParams();
@@ -29,6 +30,9 @@ const WatchScreen = () => {
 
     return (
         <Row>
+            <Helmet>
+                <title>{video?.snippet?.title}</title>
+            </Helmet>
            <Col lg={8}>
                <div className='watchScreen__player'>
                    <iframe src={`https://www.youtube.com/embed/${id}`} frameBorder='0' title={video?.snippet?.title} allowFullScreen width='100%' height='100%'></iframe>

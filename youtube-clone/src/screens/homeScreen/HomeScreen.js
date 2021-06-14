@@ -14,7 +14,7 @@ const HomeScreen = () => {
     }, [dispatch]);
 
     const {videos, activeCategory, loading} = useSelector(state => state.homeVideos);
-
+    
     const fetchData = () => {
         if(activeCategory === "All"){
             dispatch(getPoplarVideos());

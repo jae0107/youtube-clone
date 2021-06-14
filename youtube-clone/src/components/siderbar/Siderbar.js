@@ -14,21 +14,24 @@ const Siderbar = ({ sidebar, handleToggleSidebar }) => {
 
     return (
         <nav className={ sidebar ? 'sidebar open' : 'sidebar' } onClick={ ()=>handleToggleSidebar(false) }>
-            <li>
-                <MdHome size={23} />
-               <span>Home</span>
-            </li>
+            <Link to='/'>
+                <li>
+                    <MdHome size={23} />
+                    <span>Home</span>
+                </li>
+            </Link>
             <Link to='/feed/subscriptions'>
                 <li>
                     <MdSubscriptions size={23} />
                     <span>Subscriptions</span>
                 </li>
             </Link>
-            
-            <li>
-                <MdThumbUp size={23} />
-                <span>Liked Video</span>
-            </li>
+            <Link to='/like'>
+                <li>
+                    <MdThumbUp size={23} />
+                    <span>Liked Video</span>
+                </li>
+            </Link>
             <li>
                 <MdHistory size={23} />
                 <span>History</span>

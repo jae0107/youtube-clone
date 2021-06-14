@@ -12,19 +12,21 @@ const VideoHorizontal = ({video, searchScreen, subScreen}) => {
     const {id, snippet:{channelId, channelTitle, description, title, publishedAt, thumbnails: { medium }, resourceId}} = video;
     
     const isVideo = !(id.kind === 'youtube#channel' || subScreen);
-
+    
     const [views, setViews] = useState(null);
     const [duration, setDuration] = useState(null);
     const [channelIcon, setChannelIcon] = useState(null);
+    const _videoId = id?.videoId || id;
 
     useEffect(() => {
         const get_video_details = async() => {
             const {data: {items}} = await request('/videos', {
                 params: {
                     part: 'contentDetails, statistics',
-                    id: id.videoId
+                    id: _videoId
                 }
             });
+            
             setDuration(items[0].contentDetails.duration);
             setViews(items[0].statistics.viewCount);
         }
@@ -54,7 +56,7 @@ const VideoHorizontal = ({video, searchScreen, subScreen}) => {
     const history = useHistory();
     const _channelId = resourceId?.channelId || channelId;
     const handleClick = () => {
-        isVideo ? history.push(`/watch/${id.videoId}`) : history.push(`/channel/${_channelId}`);
+        isVideo ? history.push(`/watch/${_videoId}`) : history.push(`/channel/${_channelId}`);
     }
 
     const thumbnail = !isVideo && 'videoHorizontal__thumbnail-channel';

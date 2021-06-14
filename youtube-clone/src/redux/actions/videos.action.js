@@ -1,4 +1,4 @@
-import { CHANNEL_DETAILS_FAIL, CHANNEL_VIDEOS_REQUEST, CHANNEL_VIDEOS_SUCCESS, HOME_VIDEOS_FAIL, HOME_VIDEOS_REQUEST, HOME_VIDEOS_SUCCESS, RELATED_VIDEO_FAIL, RELATED_VIDEO_REQUEST, RELATED_VIDEO_SUCCESS, SEARCHED_VIDEO_FAIL, SEARCHED_VIDEO_REQUEST, SEARCHED_VIDEO_SUCCESS, SELECTED_VIDEO_FAIL, SELECTED_VIDEO_REQUEST, SELECTED_VIDEO_SUCCESS, SUBSCRIPTIONS_CHANNEL_FAIL, SUBSCRIPTIONS_CHANNEL_REQUEST, SUBSCRIPTIONS_CHANNEL_SUCCESS } from '../actionType';
+import { CHANNEL_DETAILS_FAIL, CHANNEL_VIDEOS_REQUEST, CHANNEL_VIDEOS_SUCCESS, HOME_VIDEOS_FAIL, HOME_VIDEOS_REQUEST, HOME_VIDEOS_SUCCESS, LIKED_VIDEOS_FAIL, LIKED_VIDEOS_REQUEST, LIKED_VIDEOS_SUCCESS, RELATED_VIDEO_FAIL, RELATED_VIDEO_REQUEST, RELATED_VIDEO_SUCCESS, SEARCHED_VIDEO_FAIL, SEARCHED_VIDEO_REQUEST, SEARCHED_VIDEO_SUCCESS, SELECTED_VIDEO_FAIL, SELECTED_VIDEO_REQUEST, SELECTED_VIDEO_SUCCESS, SUBSCRIPTIONS_CHANNEL_FAIL, SUBSCRIPTIONS_CHANNEL_REQUEST, SUBSCRIPTIONS_CHANNEL_SUCCESS } from '../actionType';
 import request from '../../api'
 
 export const getPoplarVideos = () => async (dispatch, getState) => {
@@ -13,7 +13,7 @@ export const getPoplarVideos = () => async (dispatch, getState) => {
                 chart: "mostPopular",
                 regionCode: "AU",
                 maxResults: 20,
-                ppageToken: getState().homeVideos.nextPageToken
+                pageToken: getState().homeVideos.nextPageToken
             }
         });
 
@@ -163,6 +163,7 @@ export const getSubscribedChannels = () => async (dispatch, getState) => {
         const { data } = await request('/subscriptions', {
             params: {
                 part: 'snippet,contentDetails',
+                maxResults: 100,
                 mine: true
             },
             headers: {
@@ -216,6 +217,39 @@ export const getVideosByChannel = (id) => async dispatch => {
         dispatch({
             type: CHANNEL_DETAILS_FAIL,
             payload: error.response.data
+        });
+    }
+}
+
+export const getLikedVideos = () => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: LIKED_VIDEOS_REQUEST
+        });
+
+        const {data} = await request("/videos", {
+            params: {
+                part: "snippet,contentDetails,statistics",
+                myRating: "like",
+                maxResults: 100
+            },
+            headers: {
+                Authorization: `Bearer ${getState().auth.accessToken}`,
+            }
+        });
+
+        dispatch({
+            type: LIKED_VIDEOS_SUCCESS,
+            payload: {
+                videos: data.items
+            }
+        });
+
+    } catch (error) {
+        console.log(error.message);
+        dispatch({
+            type: LIKED_VIDEOS_FAIL,
+            payload: error.message
         });
     }
 }

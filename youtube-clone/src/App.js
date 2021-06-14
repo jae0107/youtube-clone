@@ -8,6 +8,7 @@ import Siderbar from './components/siderbar/Siderbar'
 import WatchScreen from './screens/ watchScreen/WatchScreen'
 import ChannelScreen from './screens/channelScreen/ChannelScreen'
 import HomeScreen from './screens/homeScreen/HomeScreen'
+import LikeScreen from './screens/likeScreen/LikeScreen'
 import LoginScreen from './screens/loginScreen/LoginScreen'
 import SearchScreen from './screens/SearchScreen'
 import SubscriptionsScreen from './screens/subscriptionsScreen/SubscriptionsScreen'
@@ -73,6 +74,12 @@ const App = () => {
                 <Route path='/channel/:channelId'>
                     <Layout>
                         <ChannelScreen />
+                    </Layout>
+                </Route>
+
+                <Route path='/like'>
+                    <Layout>
+                        <LikeScreen />
                     </Layout>
                 </Route>
 
