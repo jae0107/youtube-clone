@@ -1,6 +1,6 @@
 import React from 'react'
 import './_sidebar.scss'
-import { MdSubscriptions, MdExitToApp, MdThumbUp, MdHistory, MdLibraryBooks, MdHome, MdSentimentDissatisfied } from 'react-icons/md'
+import { MdSubscriptions, MdExitToApp, MdThumbUp, MdHome, MdSentimentDissatisfied } from 'react-icons/md'
 import { useDispatch } from 'react-redux'
 import { log_out } from '../../redux/actions/auth.action'
 import { Link } from 'react-router-dom'
@@ -20,32 +20,27 @@ const Siderbar = ({ sidebar, handleToggleSidebar }) => {
                     <span>Home</span>
                 </li>
             </Link>
+
             <Link to='/feed/subscriptions'>
                 <li>
                     <MdSubscriptions size={23} />
                     <span>Subscriptions</span>
                 </li>
             </Link>
+
             <Link to='/like'>
                 <li>
                     <MdThumbUp size={23} />
                     <span>Liked Video</span>
                 </li>
             </Link>
-            <li>
-                <MdHistory size={23} />
-                <span>History</span>
-            </li>
 
-            <li>
-                <MdLibraryBooks size={23} />
-                <span>Library</span>
-            </li>
-            <li>
-                <MdSentimentDissatisfied size={23} />
-                <span>I don't Know</span>
-            </li>
-
+            <Link to='/dislike'>
+                <li>
+                    <MdSentimentDissatisfied size={23} />
+                    <span>Disliked Video</span>
+                </li>
+            </Link>
             <hr/>
 
             <li onClick={logOutHandler}>

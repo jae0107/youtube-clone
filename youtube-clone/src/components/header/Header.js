@@ -5,6 +5,7 @@ import { AiOutlineSearch } from 'react-icons/ai'
 import { MdNotifications, MdApps } from 'react-icons/md'
 import { useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 const Header = ({ handleToggleSidebar }) => {
     const [input, setInput] = useState('');
@@ -21,7 +22,9 @@ const Header = ({ handleToggleSidebar }) => {
     return (
         <div className="border border-dark header">
             <FaBars className='header__menu' size={26} onClick={() => handleToggleSidebar()}/>
-            <img src='http://pngimg.com/uploads/youtube/youtube_PNG2.png' alt='' className='header__logo'/>
+            <Link to='/'>
+                <img src='http://pngimg.com/uploads/youtube/youtube_PNG2.png' alt='' className='header__logo'/>
+            </Link>
             <form onSubmit={handleSubmit}>
                 <input type='text' placeholder='Search' value={input} onChange={e => setInput(e.target.value)}/>
                 <button type='submit'>

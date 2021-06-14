@@ -3,16 +3,16 @@ import { Container } from 'react-bootstrap';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import { useDispatch, useSelector } from 'react-redux';
 import VideoHorizontal from '../../components/videoHorizontal/VideoHorizontal';
-import { getLikedVideos } from '../../redux/actions/videos.action';
+import { getDisLikedVideos } from '../../redux/actions/videos.action';
 
-const LikeScreen = () => {
+const DislikeScreen = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getLikedVideos());
+        dispatch(getDisLikedVideos());
     }, [dispatch]);
 
-    const { videos, loading } = useSelector(state => state.likedVideos);
+    const { videos, loading } = useSelector(state => state.disLikedVideos);
     
     return (
         <Container>
@@ -26,9 +26,9 @@ const LikeScreen = () => {
                         <Skeleton width='100%' height='160px' count={20} />
                     </SkeletonTheme>
                 )
-                }
+            }
         </Container>
     )
 }
 
-export default LikeScreen
+export default DislikeScreen

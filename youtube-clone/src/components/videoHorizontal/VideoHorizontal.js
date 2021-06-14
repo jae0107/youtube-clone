@@ -35,7 +35,7 @@ const VideoHorizontal = ({video, searchScreen, subScreen}) => {
            get_video_details();
         }
         
-    },[id, isVideo]);
+    },[_videoId, isVideo]);
 
     useEffect(() => {
         const get_channel_icon = async() => {

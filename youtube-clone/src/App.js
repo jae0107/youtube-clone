@@ -7,6 +7,7 @@ import Header from './components/header/Header'
 import Siderbar from './components/siderbar/Siderbar'
 import WatchScreen from './screens/ watchScreen/WatchScreen'
 import ChannelScreen from './screens/channelScreen/ChannelScreen'
+import DislikeScreen from './screens/dislikeScreen/DislikeScreen'
 import HomeScreen from './screens/homeScreen/HomeScreen'
 import LikeScreen from './screens/likeScreen/LikeScreen'
 import LoginScreen from './screens/loginScreen/LoginScreen'
@@ -80,6 +81,12 @@ const App = () => {
                 <Route path='/like'>
                     <Layout>
                         <LikeScreen />
+                    </Layout>
+                </Route>
+
+                <Route path='/dislike'>
+                    <Layout>
+                        <DislikeScreen />
                     </Layout>
                 </Route>
 
