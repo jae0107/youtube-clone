@@ -1,28 +1,17 @@
 import { CHANNEL_DETAILS_FAIL, CHANNEL_VIDEOS_REQUEST, CHANNEL_VIDEOS_SUCCESS, DISLIKED_VIDEOS_FAIL, DISLIKED_VIDEOS_REQUEST, DISLIKED_VIDEOS_SUCCESS, HOME_VIDEOS_FAIL, HOME_VIDEOS_REQUEST, HOME_VIDEOS_SUCCESS, LIKED_VIDEOS_FAIL, LIKED_VIDEOS_REQUEST, LIKED_VIDEOS_SUCCESS, RELATED_VIDEO_FAIL, RELATED_VIDEO_REQUEST, RELATED_VIDEO_SUCCESS, SEARCHED_VIDEO_FAIL, SEARCHED_VIDEO_REQUEST, SEARCHED_VIDEO_SUCCESS, SELECTED_VIDEO_FAIL, SELECTED_VIDEO_REQUEST, SELECTED_VIDEO_SUCCESS, SUBSCRIPTIONS_CHANNEL_FAIL, SUBSCRIPTIONS_CHANNEL_REQUEST, SUBSCRIPTIONS_CHANNEL_SUCCESS } from '../actionType';
 import request from '../../api'
-import axios from 'axios'
 
-let country = "";
-axios.get('https://ipapi.co/json/').then((response) => {
-    let data = response.data;
-    country = data.country;
-    console.log(country);
-
-}).catch((error) => {
-    console.log(error);
-});
-
-export const getPoplarVideos = () => async (dispatch, getState) => {
+export const getPoplarVideos = (countryCode) => async (dispatch, getState) => {
     try {
         dispatch({
             type: HOME_VIDEOS_REQUEST
         });
-        
+        console.log(countryCode);
         const {data} = await request("/videos", {
             params: {
                 part: "snippet,contentDetails,statistics",
                 chart: "mostPopular",
-                regionCode: country,
+                regionCode: countryCode,
                 maxResults: 20,
                 pageToken: getState().homeVideos.nextPageToken
             }

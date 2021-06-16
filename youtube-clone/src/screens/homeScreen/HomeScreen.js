@@ -6,23 +6,39 @@ import { useDispatch, useSelector } from "react-redux"
 import { getPoplarVideos, getVideosByCategory } from '../../redux/actions/videos.action'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import SkeletonVideo from '../../components/skeletons/SkeletonVideo'
+import axios from 'axios'
+
+let countryCode;
+axios.get('https://ipapi.co/json/').then((response) => {
+    let data = response.data;
+    countryCode = data.country;
+    
+}).catch((error) => {
+    console.log(error);
+});
 
 const HomeScreen = () => {
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getPoplarVideos());
+        axios.get('https://ipapi.co/json/').then((response) => {
+            let data = response.data;
+            dispatch(getPoplarVideos(data.country));
+
+        }).catch((error) => {
+            console.log(error);
+        });
+        //dispatch(getPoplarVideos(countryCode));
     }, [dispatch]);
 
     const {videos, activeCategory, loading} = useSelector(state => state.homeVideos);
     
     const fetchData = () => {
         if(activeCategory === "All"){
-            dispatch(getPoplarVideos());
+            dispatch(getPoplarVideos(countryCode));
 
         } else {
             dispatch(getVideosByCategory(activeCategory));
         }
-        
     }
 
     return (
