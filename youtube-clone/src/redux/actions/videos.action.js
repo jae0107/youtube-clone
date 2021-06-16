@@ -1,22 +1,33 @@
 import { CHANNEL_DETAILS_FAIL, CHANNEL_VIDEOS_REQUEST, CHANNEL_VIDEOS_SUCCESS, DISLIKED_VIDEOS_FAIL, DISLIKED_VIDEOS_REQUEST, DISLIKED_VIDEOS_SUCCESS, HOME_VIDEOS_FAIL, HOME_VIDEOS_REQUEST, HOME_VIDEOS_SUCCESS, LIKED_VIDEOS_FAIL, LIKED_VIDEOS_REQUEST, LIKED_VIDEOS_SUCCESS, RELATED_VIDEO_FAIL, RELATED_VIDEO_REQUEST, RELATED_VIDEO_SUCCESS, SEARCHED_VIDEO_FAIL, SEARCHED_VIDEO_REQUEST, SEARCHED_VIDEO_SUCCESS, SELECTED_VIDEO_FAIL, SELECTED_VIDEO_REQUEST, SELECTED_VIDEO_SUCCESS, SUBSCRIPTIONS_CHANNEL_FAIL, SUBSCRIPTIONS_CHANNEL_REQUEST, SUBSCRIPTIONS_CHANNEL_SUCCESS } from '../actionType';
 import request from '../../api'
+import axios from 'axios'
+
+let country = "";
+axios.get('https://ipapi.co/json/').then((response) => {
+    let data = response.data;
+    country = data.country;
+    console.log(country);
+
+}).catch((error) => {
+    console.log(error);
+});
 
 export const getPoplarVideos = () => async (dispatch, getState) => {
     try {
         dispatch({
             type: HOME_VIDEOS_REQUEST
         });
-
+        
         const {data} = await request("/videos", {
             params: {
                 part: "snippet,contentDetails,statistics",
                 chart: "mostPopular",
-                regionCode: "AU",
-                maxResults: 100,
+                regionCode: country,
+                maxResults: 20,
                 pageToken: getState().homeVideos.nextPageToken
             }
         });
-
+        
         dispatch({
             type: HOME_VIDEOS_SUCCESS,
             payload: {
@@ -25,12 +36,12 @@ export const getPoplarVideos = () => async (dispatch, getState) => {
                 category: 'All'
             }
         });
-
+        
     } catch (error) {
-        console.log(error.message);
+        console.log(error.response.data);
         dispatch({
             type: HOME_VIDEOS_FAIL,
-            payload: error.message
+            payload: error.response.data
         });
     }
 }
@@ -44,7 +55,7 @@ export const getVideosByCategory = (keyword) => async (dispatch, getState) => {
         const {data} = await request("/search", {
             params: {
                 part: "snippet",
-                maxResults: 100,
+                maxResults: 20,
                 pageToken: getState().homeVideos.nextPageToken,
                 q: keyword,
                 type: 'video'
@@ -106,7 +117,7 @@ export const getRelatedVideos = (id) => async dispatch => {
             params: {
                 part: 'snippet',
                 relatedToVideoId: id,
-                maxResults: 100,
+                maxResults: 15,
                 type: 'video'
             }
         });
@@ -134,7 +145,7 @@ export const getVideosBySearch = (keyword) => async dispatch => {
         const {data} = await request("/search", {
             params: {
                 part: "snippet",
-                maxResults: 100,
+                maxResults: 20,
                 q: keyword,
                 type: 'video,channel'
             }
@@ -163,7 +174,7 @@ export const getSubscribedChannels = () => async (dispatch, getState) => {
         const { data } = await request('/subscriptions', {
             params: {
                 part: 'snippet,contentDetails',
-                maxResults: 100,
+                maxResults: 20,
                 mine: true
             },
             headers: {
@@ -231,7 +242,7 @@ export const getLikedVideos = () => async (dispatch, getState) => {
             params: {
                 part: "snippet,contentDetails,statistics",
                 myRating: "like",
-                maxResults: 100
+                maxResults: 20
             },
             headers: {
                 Authorization: `Bearer ${getState().auth.accessToken}`,
@@ -264,7 +275,7 @@ export const getDisLikedVideos = () => async (dispatch, getState) => {
             params: {
                 part: "snippet,contentDetails,statistics",
                 myRating: "dislike",
-                maxResults: 100
+                maxResults: 20
             },
             headers: {
                 Authorization: `Bearer ${getState().auth.accessToken}`,
