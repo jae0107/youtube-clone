@@ -18,7 +18,7 @@ npm i -g firebase-tools
 # Components
 
 Login page
-![4511625716035_ pic_hd](https://user-images.githubusercontent.com/87059373/124859370-fb85ea00-dfee-11eb-832b-6d25d9f92fa9.jpg)
+![4511625716035_ pic_hd](https://user-images.githubusercontent.com/87059373/124859370-fb85ea00-dfee-11eb-832b-6d25d9f92fa9.jpg){: width="100" height="100"}
 
 home page
 ![4481625716005_ pic_hd](https://user-images.githubusercontent.com/87059373/124859448-1c4e3f80-dfef-11eb-9ec1-03df2d8edce3.jpg)
