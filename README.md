@@ -4,7 +4,6 @@ This is a responsive web application.
 
 # Installation
 
-    npx create-react-app youtube-clone
     npm i react-bootstrap bootstrap node-sass@4.14.1 react-icons
     npm i react-router-dom
     npm i firebase
@@ -15,7 +14,7 @@ This is a responsive web application.
     npm i react-helmet
     npm i -g firebase-tools
 
-# Components
+# Contents
 
 ## Login page
 
