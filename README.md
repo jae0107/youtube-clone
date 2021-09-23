@@ -1,6 +1,6 @@
 # youtube-clone
 
-This is a responsive web application.
+This is a responsive web application developed in React and YouTube API. Data is retrieved from YouTube API and updated to YouTube API.
 
 # Installation
 
